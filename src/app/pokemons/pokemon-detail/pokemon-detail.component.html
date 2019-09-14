@@ -1,0 +1,30 @@
+<div class="pokemon-detail" *ngIf="pokemon">
+	<h1>Details {{pokemon.name|uppercase}}</h1>
+
+	<mat-card class="card">
+		<div class="photo">
+			<img src="/assets/img/official-artwork/{{pokemon.id}}.png" alt="{{pokemon.name}}" width="200" />
+			<div>No. {{pokemon.id|number:'3.0-0'}}</div>
+		</div>
+		
+		<div class="info">
+			<div class="name">
+				<h2>{{pokemon.name}}</h2>
+				<i class="material-icons play" (click)="play()">play_circle_outline</i>
+			</div>
+			
+			<div class="type">
+				<span class="type-badge" *ngFor="let type of pokemon.types">{{type}}</span>
+			</div>
+			
+			<div>Taille: {{pokemon.height|number}} m</div>
+			<div>Poids: {{pokemon.weight|number}} kg</div>
+		</div>
+		
+		<div>{{pokemon.description}}</div>
+	</mat-card>
+	
+	<div class="buttons">
+		<button mat-button (click)="goBack()">Go Back</button>
+	</div>
+</div>

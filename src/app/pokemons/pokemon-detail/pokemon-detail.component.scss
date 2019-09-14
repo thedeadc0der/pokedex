@@ -1,0 +1,57 @@
+
+.pokemon-detail {
+	margin: 2em auto;
+	max-width: 420px;
+	
+	h1 {
+		text-align: center;
+	}
+	
+	.photo, .info {
+		display: inline-block;;
+		vertical-align: top;
+		margin-bottom: .5em;
+	}
+	
+	.info {
+		line-height: 3em;
+	}
+	
+	.info > .name {
+		h2 {
+			margin: 0;
+			padding: 0;
+			display: inline-block;
+			font-size: 1.5em;
+		}
+		
+		button {
+			margin-left: 1em;
+		}
+		
+		.play {
+			vertical-align: text-bottom;
+			margin-left: 8px;
+			cursor: pointer;
+		}
+	}
+	
+	.photo {
+		text-align: center;
+	}
+	
+	.type-badge {
+		background-color: rgba(0, 0, 0, .5);
+		padding: 4px 12px;
+		border-radius: 48px;
+		color: white;
+		font-weight: bold;
+		margin-right: 8px;
+	}
+	
+	.buttons {
+		text-align: center;
+		margin-top: 1em;
+	}
+}
+
