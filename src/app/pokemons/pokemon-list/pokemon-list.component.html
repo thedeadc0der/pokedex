@@ -1,6 +1,4 @@
 <div class="pokemon-list">
-	<h1>Pokemon List</h1>
-
 	<mat-card class="pokemon-list-card">
 		<mat-nav-list infiniteScroll fromRoot (scrolled)="onScroll()">
 			<mat-list-item class="pokemon-list-item" *ngFor="let pokemon of pokemons" routerLink="./{{pokemon.id}}">
