@@ -14,7 +14,10 @@
 			</div>
 			
 			<div class="type">
-				<span class="type-badge" *ngFor="let type of pokemon.types">{{type}}</span>
+				<mat-chip-list>
+					<mat-chip *ngFor="let type of pokemon.types">{{type}}</mat-chip>
+				</mat-chip-list>
+				<!-- <span class="type-badge" *ngFor="let type of pokemon.types">{{type}}</span> -->
 			</div>
 			
 			<div>Taille: {{pokemon.height|number}} m</div>

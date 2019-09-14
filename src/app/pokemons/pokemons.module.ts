@@ -7,6 +7,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { PokemonsRoutingModule } from './pokemons-routing.module';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
@@ -24,6 +25,7 @@ import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.componen
 		MatGridListModule,
 		MatIconModule,
 		MatButtonModule,
+		MatChipsModule,
 	]
 })
 
