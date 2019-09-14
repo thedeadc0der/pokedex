@@ -8,6 +8,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
@@ -28,6 +29,7 @@ import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.componen
 		MatIconModule,
 		MatButtonModule,
 		MatChipsModule,
+		MatProgressSpinnerModule,
 		
 		InfiniteScrollModule,
 	]

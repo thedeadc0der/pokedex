@@ -3,11 +3,19 @@
 		text-align: center;
 	}
 	
-	.pokemon-list-item {
+	.item {
 		outline: none;
 	}
 	
-	.pokemon-list-card {
+	.card {
 		padding: 0;
+	}
+	
+	.spinner-wrapper {
+		padding: 16px;
+	}
+	
+	.spinner {
+		margin: 0 auto;
 	}
 }

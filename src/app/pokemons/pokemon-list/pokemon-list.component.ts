@@ -14,6 +14,7 @@ export class PokemonListComponent implements OnInit {
 	constructor(private pokemonService: PokemonService) { }
 	
 	pokemons: Array<Pokemon> = []
+	loading: boolean = false;
 	
 	get idOfLastPokemon(): number {
 		// If there are no pokemons, start at index 0
@@ -25,8 +26,13 @@ export class PokemonListComponent implements OnInit {
 	}
 	
 	getPokemons(){
+		this.loading = true;
+		
 		this.pokemonService.getPokemons(this.idOfLastPokemon, POKEMONS_PER_PAGE).subscribe(pokemons => {
+			// XXX: If pokemons aren't always returned in order, we might need
+			//      to sort them here.
 			this.pokemons = [...this.pokemons, ...pokemons.data];
+			this.loading = false;
 		});
 	}
 	
