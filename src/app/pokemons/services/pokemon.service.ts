@@ -27,8 +27,12 @@ export class PokemonService {
 		};
 	}
 	
-	getPokemons(): Observable<PagedData<Pokemon>> {
-		return this.http.get<PagedData<Pokemon>>(`${BASE_URL}/pokemons`).pipe(
+	getPokemons(from: number = 0, limit: number = 10): Observable<PagedData<Pokemon>> {
+		const params = new HttpParams()
+			.set('offset', String(from))
+			.set('limit', String(limit));
+		
+		return this.http.get<PagedData<Pokemon>>(`${BASE_URL}/pokemons`, {params}).pipe(
 			catchError(this.handleError<PagedData<Pokemon>>('getPokemons')),
 		);
 	}
