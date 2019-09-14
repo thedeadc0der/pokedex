@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'
+
 import { PokemonsRoutingModule } from './pokemons-routing.module';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
@@ -26,6 +28,8 @@ import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.componen
 		MatIconModule,
 		MatButtonModule,
 		MatChipsModule,
+		
+		InfiniteScrollModule,
 	]
 })
 

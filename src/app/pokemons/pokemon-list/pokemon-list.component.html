@@ -2,12 +2,11 @@
 	<h1>Pokemon List</h1>
 
 	<mat-card class="pokemon-list-card">
-		<mat-list>
-			<mat-list-item class="pokemon-list-item" matRipple *ngFor="let pokemon of pokemons" routerLink="./{{pokemon.id}}">
+		<mat-nav-list infiniteScroll fromRoot (scrolled)="onScroll()">
+			<mat-list-item class="pokemon-list-item" *ngFor="let pokemon of pokemons" routerLink="./{{pokemon.id}}">
 				<img matListAvatar src="/assets/img/sprites/{{pokemon.id}}.png" alt="...">
 				<h3 matLine>{{pokemon.name}}</h3>
 			</mat-list-item>
-		</mat-list>
+		</mat-nav-list>
 	</mat-card>
 </div>
-
