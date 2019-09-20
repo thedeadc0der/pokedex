@@ -1,5 +1,9 @@
-<div class="pokemon-detail" *ngIf="pokemon">
-	<mat-card class="card">
+<div class="pokemon-detail">
+	<mat-card class="card" *ngIf="!pokemon">
+		Select a Pokemon!
+	</mat-card>
+	
+	<mat-card class="card" *ngIf="pokemon">
 		<div class="photo">
 			<img src="/assets/img/official-artwork/{{pokemon.id}}.png" alt="{{pokemon.name}}" width="200" />
 			<div>No. {{pokemon.id|number:'3.0-0'}}</div>
@@ -26,6 +30,5 @@
 	</mat-card>
 	
 	<div class="buttons">
-		<button mat-button (click)="goBack()">Go Back</button>
 	</div>
 </div>

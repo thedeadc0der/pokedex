@@ -1,12 +1,12 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
-import { Pokemon } from '../models/pokemon.model';
 import { PagedData } from '../models/paged-data.model';
+import { Pokemon } from '../models/pokemon.model';
+import { environment } from '../../../environments/environment';
 
-const BASE_URL = 'http://app-ec21e68e-3e55-42d7-b1ae-3eef7507a353.cleverapps.io';
 
 @Injectable({
 	providedIn: 'root'
@@ -32,16 +32,29 @@ export class PokemonService {
 			.set('offset', String(from))
 			.set('limit', String(limit));
 		
-		return this.http.get<PagedData<Pokemon>>(`${BASE_URL}/pokemons`, {params}).pipe(
+		return this.http.get<PagedData<Pokemon>>(`${environment.apiUrl}/pokemons`, {params}).pipe(
 			catchError(this.handleError<PagedData<Pokemon>>('getPokemons')),
 		);
 	}
 	
 	getPokemon(id: number): Observable<Pokemon> {
-		const url = `${BASE_URL}/pokemons/${id}`;
+		const url = `${environment.apiUrl}/pokemons/${id}`;
 		
 		return this.http.get<Pokemon>(url).pipe(
 			catchError(this.handleError<Pokemon>(`getPokemon(${id})`))
+		);
+	}
+	
+	search(query: string, from: number = 0, limit: number = 10): Observable<PagedData<Pokemon>> {
+		const url = `${environment.apiUrl}/pokemons`;
+		
+		const params = new HttpParams()
+			.set('offset', String(from))
+			.set('limit', String(limit))
+			.set('search', query);
+			
+		return this.http.get<PagedData<Pokemon>>(url, {params}).pipe(
+			catchError(this.handleError<PagedData<Pokemon>>('search')),
 		);
 	}
 }
