@@ -16,19 +16,10 @@ export class PokemonListComponent implements OnInit {
 	pokemons: Array<Pokemon> = []
 	loading: boolean = false;
 	
-	get idOfLastPokemon(): number {
-		// If there are no pokemons, start at index 0
-		if( this.pokemons.length === 0 )
-			return 0;
-		
-		// If there are pokemons, start after the last one
-		return this.pokemons[this.pokemons.length - 1].id;
-	}
-	
 	getPokemons(){
 		this.loading = true;
 		
-		this.pokemonService.getPokemons(this.idOfLastPokemon, POKEMONS_PER_PAGE).subscribe(pokemons => {
+		this.pokemonService.getPokemons(this.pokemons.length, POKEMONS_PER_PAGE).subscribe(pokemons => {
 			// XXX: If pokemons aren't always returned in order, we might need
 			//      to sort them here.
 			this.pokemons = [...this.pokemons, ...pokemons.data];
