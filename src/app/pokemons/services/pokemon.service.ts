@@ -7,7 +7,6 @@ import { PagedData } from '../models/paged-data.model';
 import { Pokemon } from '../models/pokemon.model';
 import { environment } from '../../../environments/environment';
 
-
 @Injectable({
 	providedIn: 'root'
 })

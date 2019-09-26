@@ -1,0 +1,25 @@
+<mat-toolbar class="app-bar" color="primary">
+	<!-- We must include <mat-form-field otherwise the search field renders unstyled -->
+	<div class="hidden" >
+		<mat-form-field>
+			<input matInput />
+		</mat-form-field>
+	</div>
+	
+	<img src="assets/pokeball.svg" width="48" height="48" routerLink="/" />
+	
+	<div class="search fill">
+		<i class="material-icons">search</i>
+		<input matInput placeholder="Search…" [(ngModel)]="searchQuery" />
+	</div>
+	
+	<ng-container *ngIf="!signedIn">
+		<button mat-button (click)="openSignInDialog()">SIGN IN</button>
+		<button mat-button (click)="openSignUpDialog()">SIGN UP</button>
+	</ng-container>
+	
+	<ng-container *ngIf="signedIn">
+		<button mat-icon-button matTooltip="My Team" routerLink="/team"><mat-icon>face</mat-icon></button>
+		<button mat-icon-button matTooltip="Sign Out" (click)="signOut()"><mat-icon>exit_to_app</mat-icon></button>
+	</ng-container>
+</mat-toolbar>

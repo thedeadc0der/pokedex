@@ -1,0 +1,17 @@
+
+.team {
+	max-width: 640px;
+	margin: 80px auto 0;
+	
+	.fill {
+		flex: 1 1 auto;
+	}
+
+	.add-pokemons {
+		text-align: center;
+	}
+
+	.loading {
+		margin: auto;
+	}
+}

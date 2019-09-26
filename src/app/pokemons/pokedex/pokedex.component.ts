@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokedexComponent implements OnInit {
 	private selectedPokemon: number = null;
+	searchQuery: string = '';
 	
 	constructor() { }
 
@@ -15,10 +16,13 @@ export class PokedexComponent implements OnInit {
 	
 	onSelectPokemon(id){
 		this.selectedPokemon = id;
-		this.updateDetails();
 	}
 	
-	updateDetails(){
-		
+	onSignIn(){
+		alert("signing in");
+	}
+	
+	searchChanged(query: string){
+		this.searchQuery = query;
 	}
 }

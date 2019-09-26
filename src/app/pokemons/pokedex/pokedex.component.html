@@ -1,6 +1,8 @@
+<app-app-bar (search-change)="searchChanged($event)"></app-app-bar>
+
 <mat-sidenav-container class="pokedex-container" autosize>
 	<mat-sidenav mode="side" opened>
-		<app-pokemon-list (select)="onSelectPokemon($event)"></app-pokemon-list>
+		<app-pokemon-list (select)="onSelectPokemon($event)" [search]="searchQuery"></app-pokemon-list>
 	</mat-sidenav>
 	
 	<mat-sidenav-content>

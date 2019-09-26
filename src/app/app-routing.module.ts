@@ -5,7 +5,7 @@ import { PokemonsModule } from './pokemons/pokemons.module';
 
 const routes: Routes = [
 	{
-		path: 'pokemons',
+		path: '',
 		loadChildren: () => import('./pokemons/pokemons.module').then((m: any) => m.PokemonsModule),
 	},
 ];

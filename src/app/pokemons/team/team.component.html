@@ -1,0 +1,40 @@
+<app-app-bar></app-app-bar>
+
+<div class="team">
+	<h1>My Team</h1>
+	
+	<mat-card>
+		<div *ngIf="loading">
+			<mat-spinner diameter="24" class="loading"></mat-spinner>
+		</div>
+		
+		<mat-action-list *ngIf="!loading">
+			<h3 mat-subheader>My Pokémons</h3>
+			
+			<mat-list-item *ngFor="let pokemon of selectedPokemons">
+				<img matListAvatar src="/assets/img/sprites/{{pokemon.id}}.png" />
+				[{{pokemon.id|number:'3.0-0'}}] {{pokemon.name}}
+				<div class="fill"></div>
+				<button (click)="removeFromSelection(pokemon)">REMOVE</button>
+			</mat-list-item>
+			
+			<div class="add-pokemons" *ngIf="!addingPokemons">
+				<button mat-raised-button color="primary" (click)="startAddingPokemons()">Add Pokemons</button>
+			</div>
+			
+			<div class="add-pokemons" *ngIf="addingPokemons">
+				<button mat-raised-button color="primary" (click)="savePokemons()">Save Team</button>
+			</div>
+			
+			<ng-container *ngIf="addingPokemons">
+				<h3 mat-subheader>Pokémons to Add</h3>
+				<mat-list-item *ngFor="let pokemon of pokemonsToAdd" (click)="addToSelection(pokemon)">
+					<img matListAvatar src="/assets/img/sprites/{{pokemon.id}}.png" />
+					[{{pokemon.id|number:'3.0-0'}}] {{pokemon.name}}
+					<div class="fill"></div>
+					<button>ADD</button>
+				</mat-list-item>
+			</ng-container>
+		</mat-action-list>
+	</mat-card>
+</div>

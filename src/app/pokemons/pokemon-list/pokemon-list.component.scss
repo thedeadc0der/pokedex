@@ -1,4 +1,6 @@
 .pokemon-list {
+	min-width: 170px;
+	
 	h1 {
 		text-align: center;
 	}
@@ -16,15 +18,21 @@
 		overflow: auto;
 	}
 	
-	.search-container {
-		padding: 8px 8px 0;
-	}
-	
 	.spinner-wrapper {
 		padding: 16px;
 	}
 	
 	.spinner {
 		margin: 0 auto;
+	}
+	
+	.no-results {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		margin: 16px;
+		text-align: center;
+		color: #ffffff9c;
 	}
 }

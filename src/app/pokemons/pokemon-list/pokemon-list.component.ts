@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Pokemon } from '../models/pokemon.model';
 import { PokemonService } from '../services/pokemon.service';
@@ -12,8 +12,7 @@ const POKEMONS_PER_PAGE: number = 20;
 })
 export class PokemonListComponent implements OnInit {
 	@Output() select = new EventEmitter();
-	
-	searchQuery: string = '';
+	@Input('search') searchQuery: string = '';
 	
 	constructor(private pokemonService: PokemonService) { }
 	
@@ -21,11 +20,9 @@ export class PokemonListComponent implements OnInit {
 	loading: boolean = false;
 	
 	getPokemons(){
-		console.log('getPokemons / search=' + this.searchQuery);
 		this.loading = true;
 		
 		if( !this.searchQuery ){
-			console.log('getting regular pokemons');
 			// If we're not searching, just get all pokemons
 			this.pokemonService.getPokemons(this.pokemons.length, POKEMONS_PER_PAGE).subscribe(pokemons => {
 				// XXX: If pokemons aren't always returned in order, we might need
@@ -58,4 +55,8 @@ export class PokemonListComponent implements OnInit {
 		this.getPokemons();
 	}
 	
+	ngOnChanges(changes: object){
+		if( changes.hasOwnProperty('searchQuery') )
+			this.onSearchModelChange();
+	}
 }
