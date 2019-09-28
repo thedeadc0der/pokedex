@@ -1,5 +1,42 @@
-<app-app-bar></app-app-bar>
+<app-app-bar (search-change)="searchChanged($event)"></app-app-bar>
 
+<mat-sidenav-container class="team-container" autosize>
+	<mat-sidenav mode="side" opened>
+		<app-pokemon-list (select)="addToSelection($event)" [search]="searchQuery"></app-pokemon-list>
+	</mat-sidenav>
+	
+	<mat-sidenav-content class="content">
+		<header>
+			<h1>My Team</h1>
+			<button mat-raised-button color="primary" [disabled]="saving" (click)="savePokemons()">SAVE</button>
+		</header>
+		
+		<mat-card>
+			<div *ngIf="loading">
+				<mat-spinner diameter="24" class="loading"></mat-spinner>
+			</div>
+			
+			<mat-action-list *ngIf="!loading">
+				<h3 mat-subheader>My Pokémons ({{selectedPokemons.length}}/{{POKEMONS_PER_TEAM}})</h3>
+				
+				<div class="empty" *ngIf="selectedPokemons.length === 0">
+					Your team is empty, add Pokémons by clicking them in the
+					list to the left of the page. You can also search for them
+					by name or number.
+				</div>
+				
+				<mat-list-item *ngFor="let pokemon of selectedPokemons">
+					<img matListAvatar src="/assets/img/sprites/{{pokemon.id}}.png" />
+					[{{pokemon.id|number:'3.0-0'}}] {{pokemon.name}}
+					<div class="fill"></div>
+					<button (click)="removeFromSelection(pokemon)">REMOVE</button>
+				</mat-list-item>
+			</mat-action-list>
+		</mat-card>
+	</mat-sidenav-content>
+</mat-sidenav-container>
+
+<!--
 <div class="team">
 	<h1>My Team</h1>
 	
@@ -38,3 +75,4 @@
 		</mat-action-list>
 	</mat-card>
 </div>
+-->

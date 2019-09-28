@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Pokemon } from '../models/pokemon.model';
+
 @Component({
   selector: 'app-pokedex',
   templateUrl: './pokedex.component.html',
@@ -14,8 +16,8 @@ export class PokedexComponent implements OnInit {
 	ngOnInit() {
 	}
 	
-	onSelectPokemon(id){
-		this.selectedPokemon = id;
+	onSelectPokemon(pokemon: Pokemon){
+		this.selectedPokemon = pokemon.id;
 	}
 	
 	onSignIn(){

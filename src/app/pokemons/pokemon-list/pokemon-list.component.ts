@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 import { Pokemon } from '../models/pokemon.model';
 import { PokemonService } from '../services/pokemon.service';
@@ -11,7 +11,7 @@ const POKEMONS_PER_PAGE: number = 20;
 	styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit {
-	@Output() select = new EventEmitter();
+	@Output() select = new EventEmitter<Pokemon>();
 	@Input('search') searchQuery: string = '';
 	
 	constructor(private pokemonService: PokemonService) { }
@@ -19,44 +19,47 @@ export class PokemonListComponent implements OnInit {
 	pokemons: Array<Pokemon> = []
 	loading: boolean = false;
 	
-	getPokemons(){
+	// Fetches the next POKEMONS_PER_PAGE pokémons
+	getNextPokemons(){
 		this.loading = true;
-		
-		if( !this.searchQuery ){
-			// If we're not searching, just get all pokemons
-			this.pokemonService.getPokemons(this.pokemons.length, POKEMONS_PER_PAGE).subscribe(pokemons => {
-				// XXX: If pokemons aren't always returned in order, we might need
-				//      to sort them here.
-				this.pokemons = [...this.pokemons, ...pokemons.data];
-				this.loading = false;
-			});
-		} else {
-			this.pokemonService.search(this.searchQuery, 0, POKEMONS_PER_PAGE).subscribe(pokemons => {
-				this.pokemons = pokemons.data;
-				this.loading = false;
-			});
-		}
+		this.pokemonService.getPokemons(this.pokemons.length, POKEMONS_PER_PAGE).subscribe(pokemons => {
+			console.log(`Adding ${pokemons.data.length} pokémons after the ${this.pokemons.length}`)
+			// XXX: If pokemons aren't always returned in order, we might need
+			//      to sort them here.
+			this.pokemons = [...this.pokemons, ...pokemons.data];
+			this.loading = false;
+		});
 	}
 	
-	ngOnInit() {
-		this.getPokemons();
+	searchPokemons(){
+		this.loading = true;
+		this.pokemonService.search(this.searchQuery, 0, POKEMONS_PER_PAGE).subscribe(pokemons => {
+			console.log(`Replacing everything with ${pokemons.data.length} searched pokémons`)
+			this.pokemons = pokemons.data;
+			this.loading = false;
+		});
 	}
 	
 	onScroll(){
-		this.getPokemons();
+		this.getNextPokemons();
 	}
 	
-	onItemClick(id){
-		this.select.emit(id);
+	onItemClick(pokemon: Pokemon){
+		this.select.emit(pokemon);
 	}
 	
-	onSearchModelChange(){
-		console.log('searching…');
-		this.getPokemons();
+	ngOnInit(){
 	}
 	
-	ngOnChanges(changes: object){
-		if( changes.hasOwnProperty('searchQuery') )
-			this.onSearchModelChange();
+	ngOnChanges(changes: SimpleChanges){
+		if( changes.searchQuery ){
+			if( changes.searchQuery.currentValue ){
+				this.searchPokemons();
+			} else {
+				// If the query was cleared, clear the Pokémons before adding more
+				this.pokemons = [];
+				this.getNextPokemons();
+			}
+		}
 	}
 }

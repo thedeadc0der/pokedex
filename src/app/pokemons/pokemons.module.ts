@@ -17,6 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppBarComponent } from './app-bar/app-bar.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
@@ -48,6 +49,7 @@ import { TeamComponent } from './team/team.component';
 		MatToolbarModule,
 		MatDialogModule,
 		MatTooltipModule,
+		MatSnackBarModule,
 		
 		InfiniteScrollModule,
 	]

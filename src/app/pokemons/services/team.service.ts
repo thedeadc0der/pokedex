@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin, of } from 'rxjs';
-import { mergeMap, defaultIfEmpty } from 'rxjs/operators';
+import { mergeMap, defaultIfEmpty, map } from 'rxjs/operators';
 
 import { AccountService } from './account.service';
 import { Pokemon } from '../models/pokemon.model';
@@ -31,7 +31,21 @@ export class TeamService {
 	}
 	
 	setPokemons(ids: number[]): Observable<any> {
-		return of(null);
+		console.log("setting pokemons to: ", ids);
+		const url = `${environment.apiUrl}/trainers/me/team`;
+		
+		// XXX: The default responseType is JSON, which causes an error when
+		//      the PUT request returns a 204 which has no body, so we set it
+		//      to text so the response can be interpreted as an empty string
+		//      without causing an error. 
+		return this.http.put(url, ids, {
+			responseType: 'text',
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				...this.accountService.httpHeaders
+			}),
+		}).pipe(
+			map(result => console.log(result)),
+		);
 	}
-	
 }

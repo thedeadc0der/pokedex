@@ -1,7 +1,7 @@
 <div class="pokemon-list">
 	<mat-card class="card">
 		<mat-nav-list class="nav-list" infiniteScroll [scrollWindow]="false" (scrolled)="onScroll()">
-			<mat-list-item class="item" *ngFor="let pokemon of pokemons" (click)="onItemClick(pokemon.id)">
+			<mat-list-item class="item" *ngFor="let pokemon of pokemons" (click)="onItemClick(pokemon)">
 				<img matListAvatar src="/assets/img/sprites/{{pokemon.id}}.png" alt="...">
 				<h3 matLine>{{pokemon.name}}</h3>
 			</mat-list-item>
