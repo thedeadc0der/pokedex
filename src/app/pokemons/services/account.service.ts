@@ -9,6 +9,12 @@ const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+interface AuthResponse {
+	access_token: string;
+	refresh_token: string;
+	expires_in: string;
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -43,9 +49,11 @@ export class AccountService {
 	public signIn(email: string, password: string): Observable<any> {
 		const url = `${environment.apiUrl}/auth/login`;
 		
-		return this.http.post(url, {email, password}, httpOptions).pipe(tap(res => {
-			this.saveTokens(res.access_token, res.refresh_token);
-		}));
+		return this.http.post(url, {email, password}, httpOptions).pipe(
+			tap((res: AuthResponse) => {
+				this.saveTokens(res.access_token, res.refresh_token);
+			})
+		);
 	}
 	
 	public signUp(email: string, password: string): Observable<string> {
@@ -71,5 +79,15 @@ export class AccountService {
 		this.refreshToken = undefined;
 		window.localStorage.removeItem('accessToken');
 		window.localStorage.removeItem('refreshToken');
+	}
+	
+	public refreshAccessToken(){
+		return this.http.post(`${environment.apiUrl}/auth/refresh`, {
+			refresh_token: this.refreshToken
+		}, httpOptions).pipe(
+			tap((res: AuthResponse) => {
+				this.saveTokens(res.access_token, res.refresh_token);
+			})
+		);
 	}
 }
