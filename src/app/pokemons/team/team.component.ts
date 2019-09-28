@@ -34,7 +34,7 @@ export class TeamComponent implements OnInit {
 	savePokemons(){
 		this.saving = false;
 		this.teamService.setPokemons(this.selectedPokemons.map(pkmn => pkmn.id)).subscribe(r => {
-			console.log("team saved", r);
+			this.snackbar.open(`Your team has been saved!`);
 		});
 	}
 	
@@ -42,16 +42,13 @@ export class TeamComponent implements OnInit {
 		if( this.selectedPokemons.length === this.POKEMONS_PER_TEAM ){
 			// Limit the size of the team
 			this.snackbar.open(`Can't add ${pokemon.name}, your team is already full!`);
-		} else if( this.teamContains(pokemon) ){
-			// Don't allow adding the same Pokémon multiple times
-			this.snackbar.open(`${pokemon.name} is already part of your team!`);
 		} else {
 			this.selectedPokemons.push(pokemon);
 		}
 	}
 	
-	removeFromSelection(pokemon){
-		this.selectedPokemons = this.selectedPokemons.filter(p => p.id !== pokemon.id);
+	removeFromSelection(index: number){
+		this.selectedPokemons.splice(index, 1);
 	}
 	
 	private teamContains(pokemon){
